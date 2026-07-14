@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midnight — About &amp; Updates</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — change these to re-theme the whole page
+   ============================================================ */
+:root {
+  --bg: #0b0e1a;
+  --surface: rgba(255,255,255,0.04);
+  --surface-solid: #12162a;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.16);
+  --blue: #4ecdff;
+  --violet: #a374ff;
+  --gradient: linear-gradient(135deg, var(--blue), var(--violet));
+  --text: #eef1f8;
+  --text-muted: #8b92ab;
+  --text-faint: #565d78;
+  --font-display: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+/* ---- category colors: add more if you use more categories ---- */
+.cat-Projects   { --cat: #a374ff; }
+.cat-Coding      { --cat: #ffb454; }
+.cat-Writing     { --cat: #ff8fd6; }
+.cat-Design      { --cat: #5ee6d0; }
+.cat-Personal    { --cat: #9ea8ff; }
+.cat-Announcement{ --cat: #4ecdff; }
+.cat-Other       { --cat: #8b92ab; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(78,205,255,0.10), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(163,116,255,0.10), transparent 60%),
+    var(--bg);
+}
+h1,h2,h3 { font-family: var(--font-display); font-weight: 600; line-height:1.2; letter-spacing:-0.01em; }
+a { color:inherit; text-decoration:none; }
+img { max-width:100%; display:block; }
+button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+.container { max-width: 900px; margin:0 auto; padding: 0 24px; }
+.glass { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-md); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+::-webkit-scrollbar { width:10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: var(--radius-full); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11,14,26,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .container { display:flex; align-items:center; justify-content:space-between; height:70px; }
+.brand { display:flex; align-items:center; gap:8px; font-family: var(--font-display); font-weight:700; font-size:1.2rem; }
+.brand-mark { width:10px; height:10px; border-radius:50%; background: var(--gradient); box-shadow: 0 0 24px rgba(78,205,255,0.35); }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { font-size:0.9rem; color: var(--text-muted); font-weight:500; transition: color 150ms var(--ease); }
+.nav-links a:hover { color: var(--text); }
+
+/* ============================================================
+   HERO / ABOUT
+   ============================================================ */
+.hero { padding: 72px 0 56px; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; font-family: var(--font-mono); font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--blue); margin-bottom:20px; }
+.live-dot { width:7px; height:7px; border-radius:50%; background: var(--blue); animation: pulse 2s infinite; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(78,205,255,0.55); }
+  70% { box-shadow: 0 0 0 8px rgba(78,205,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(78,205,255,0); }
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom:16px; }
+.hero h1 .highlight { background: var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero-desc { font-size:1.05rem; color: var(--text-muted); max-width: 620px; margin-bottom:28px; }
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 36px;}
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 26px; border-radius: var(--radius-full); font-size:0.9rem; font-weight:600; transition: transform 150ms var(--ease), box-shadow 150ms var(--ease); }
+.btn-primary { background: var(--gradient); color:#06070d; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(78,205,255,0.35); }
+.btn-ghost { background: var(--surface); border:1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+
+.about-card { padding: 28px; display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+.about-avatar {
+  width: 84px; height:84px; border-radius: 50%;
+  background: var(--gradient);
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-display); font-weight:700; font-size:1.8rem; color:#06070d;
+}
+.about-text { flex:1; min-width:240px; }
+.about-text h3 { font-size:1.1rem; margin-bottom:8px; }
+.about-text p { color: var(--text-muted); font-size:0.95rem; }
+.about-links { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+.about-links a { font-family: var(--font-mono); font-size:0.75rem; padding:6px 14px; border:1px solid var(--border); border-radius: var(--radius-full); color: var(--text-muted); transition: all 150ms var(--ease); }
+.about-links a:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ============================================================
+   UPDATES SECTION
+   ============================================================ */
+.section-heading { font-size:1.7rem; margin: 56px 0 24px; }
+.section-heading .highlight { background: var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+.controls-bar { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
+.search-box { flex:1; min-width:200px; display:flex; align-items:center; gap:10px; padding:12px 18px; }
+.search-box input { background:none; border:none; width:100%; font-size:0.9rem; color: var(--text); }
+.search-box input::placeholder { color: var(--text-faint); }
+.filter-chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+.filter-chip { font-family: var(--font-mono); font-size:0.75rem; padding:8px 16px; border-radius: var(--radius-full); border:1px solid var(--border); background: var(--surface); color: var(--text-muted); transition: all 150ms var(--ease); }
+.filter-chip:hover { border-color: var(--border-hover); color: var(--text); }
+.filter-chip.active { background: var(--gradient); color:#06070d; border-color:transparent; font-weight:600; }
+.results-count { font-size:0.75rem; color: var(--text-faint); font-family: var(--font-mono); margin-bottom:20px; }
+
+/* ---- timeline ---- */
+.timeline { position:relative; padding-left:32px; }
+.timeline::before {
+  content:""; position:absolute; left:5px; top:8px; bottom:8px; width:1px;
+  background: linear-gradient(to bottom, var(--blue), var(--violet), transparent);
+  opacity:0.4;
+}
+.timeline-item { position:relative; margin-bottom:16px; }
+.timeline-dot {
+  position:absolute; left:-27px; top:24px; width:11px; height:11px; border-radius:50%;
+  background: var(--bg); border:2px solid var(--blue);
+}
+.timeline-item:first-child .timeline-dot { background: var(--blue); animation: pulse 2s infinite; }
+
+/* ---- update card (click to expand inline, no new page) ---- */
+.update-card { padding:22px; cursor:pointer; transition: transform 200ms var(--ease), border-color 200ms var(--ease); }
+.update-card:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+.card-meta { display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.category-pill { display:inline-flex; align-items:center; gap:6px; font-family: var(--font-mono); font-size:0.72rem; padding:3px 12px; border-radius: var(--radius-full); background: var(--surface); border:1px solid var(--border); color: var(--text-muted); }
+.category-dot { width:6px; height:6px; border-radius:50%; background: var(--cat, var(--blue)); }
+.card-date { font-family: var(--font-mono); font-size:0.72rem; color: var(--text-faint); }
+.card-title { font-size:1.15rem; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.card-chevron { flex-shrink:0; transition: transform 200ms var(--ease); color: var(--text-faint); }
+.update-card.expanded .card-chevron { transform: rotate(180deg); }
+.card-desc { color: var(--text-muted); font-size:0.9rem; }
+.card-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:14px; }
+.tag-chip { font-family: var(--font-mono); font-size:0.68rem; color: var(--text-faint); padding:2px 8px; border:1px solid var(--border); border-radius:6px; }
+
+/* ---- expanded content panel ---- */
+.card-full {
+  max-height:0;
+  overflow:hidden;
+  transition: max-height 350ms var(--ease), margin-top 350ms var(--ease);
+}
+.update-card.expanded .card-full { margin-top:18px; }
+.card-full-inner { padding-top:18px; border-top:1px solid var(--border); color: var(--text-muted); font-size:0.92rem; }
+.card-full-inner h4 { color: var(--text); font-size:1rem; margin: 14px 0 6px; }
+.card-full-inner ul { padding-left:20px; margin:8px 0; }
+.card-full-inner li { margin-bottom:4px; }
+.card-full-inner strong { color: var(--text); }
+
+.empty-state { text-align:center; padding:60px 20px; color: var(--text-muted); }
+.empty-state h3 { color: var(--text); margin-bottom:8px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer { border-top:1px solid var(--border); padding: 40px 0; margin-top:60px; text-align:center; }
+.site-footer p { color: var(--text-faint); font-size:0.8rem; font-family: var(--font-mono); }
+
+@media (max-width: 640px) {
+  .nav-links { gap:16px; }
+  .site-header .container { height:60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="container">
+    <a href="#top" class="brand">
+      <span class="brand-mark"></span>
+      Midnight
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#updates">Updates</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============================================================
+       HERO / ABOUT — edit the text directly below
+       ============================================================ -->
+  <section class="hero container" id="top">
+    <span class="eyebrow"><span class="live-dot"></span> Personal log</span>
+    <h1>Hi, I'm <span class="highlight">Midnight</span>.</h1>
+    <p class="hero-desc">
+      This is where I share what I'm working on — new projects, writing,
+      code, ideas, and whatever else is happening. Updated whenever there's
+      something worth writing down.
+    </p>
+    <div class="hero-actions">
+      <a href="#updates" class="btn btn-primary">See latest updates</a>
+      <a href="#about" class="btn btn-ghost">About me</a>
+    </div>
+
+    <div class="about-card glass" id="about">
+      <div class="about-avatar">M</div>
+      <div class="about-text">
+        <h3>About me</h3>
+        <p>
+          <!-- Replace this paragraph with your own bio -->
+          I'm a writer and creator who likes building things — stories, small
+          websites, games, whatever I'm curious about that week. This page is
+          my running log of it all.
+        </p>
+        <div class="about-links">
+          <!-- Replace # with your real links -->
+          <a href="#">Wattpad</a>
+          <a href="#">Discord</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       UPDATES — click a card to expand it, nothing links off-page
+       ============================================================ -->
+  <section class="container" id="updates">
+    <h2 class="section-heading">Latest <span class="highlight">updates</span></h2>
+
+    <div class="controls-bar">
+      <label class="search-box glass">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input id="search-input" type="text" placeholder="Search updates...">
+      </label>
+    </div>
+
+    <div class="filter-chips" id="category-chips"></div>
+    <p class="results-count" id="results-count"></p>
+
+    <div class="timeline" id="updates-list"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Midnight — built with plain HTML, CSS &amp; JS</p>
+</footer>
+
+<script>
+/* ================================================================
+   YOUR UPDATES LIVE HERE.
+   To add a new one: copy an entire { ... } block below, paste it
+   right after the opening "[" (so it appears first / newest),
+   and change the text. That's it — no new HTML file, no new link.
+   Everything below just reads this list and builds the page.
+
+   Fields:
+   - title       : short headline
+   - date        : "YYYY-MM-DD" (used for sorting + display)
+   - category    : must match one of the .cat-XXX classes above
+                   (Projects, Coding, Writing, Design, Personal,
+                   Announcement, Other) — or add your own class.
+   - tags        : array of short words, shown as #chips
+   - summary     : one line shown on the collapsed card
+   - details     : the full write-up — supports basic HTML like
+                   <p>, <ul><li>, <strong>, <h4>
+================================================================ */
+const updates = [
+  {
+    title: "Started This Website",
+    date: "2026-07-10",
+    category: "Announcement",
+    tags: ["website", "launch"],
+    summary: "Built this whole page as a single file I can keep editing in VS Code.",
+    details: `
+      <p>Wanted a personal page where I could log new projects and updates
+      without dealing with a full multi-page site every time.</p>
+      <h4>Why one file</h4>
+      <p>Easier to maintain — everything lives in one place, and adding a new
+      update is just copying a block of text, not creating new pages or links.</p>
+    `
+  },
+  {
+    title: "New Project: (name it here)",
+    date: "2026-07-08",
+    category: "Projects",
+    tags: ["new", "wip"],
+    summary: "Kicking off a new project — details below.",
+    details: `
+      <p>Replace this with what you're actually starting. A couple sentences
+      on what it is and why you're building it.</p>
+      <ul>
+        <li>What's done so far</li>
+        <li>What's next</li>
+      </ul>
+    `
+  },
+  {
+    title: "Example: Writing Update",
+    date: "2026-07-01",
+    category: "Writing",
+    tags: ["writing", "wip"],
+    summary: "An example of what a writing-related update looks like.",
+    details: `
+      <p>This is just an example card — feel free to delete it once you've
+      got your own real updates in here.</p>
+      <p><strong>Tip:</strong> keep <code>details</code> short-ish; this isn't
+      meant to be a full blog post, just a log entry.</p>
+    `
+  }
+];
+
+/* ---------------- rendering logic — no need to touch below ---------------- */
+
+let activeCategory = "all";
+let activeSearch = "";
+
+function formatDate(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function sortedUpdates() {
+  return [...updates].sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function renderChips() {
+  const cats = ["all", ...new Set(updates.map(u => u.category))];
+  const wrap = document.getElementById("category-chips");
+  wrap.innerHTML = cats.map(c =>
+    `<button class="filter-chip${c === "all" ? " active" : ""}" data-cat="${c}">${c === "all" ? "All" : c}</button>`
+  ).join("");
+
+  wrap.querySelectorAll(".filter-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      activeCategory = chip.dataset.cat;
+      wrap.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      renderList();
+    });
+  });
+}
+
+function matches(u) {
+  const catOk = activeCategory === "all" || u.category === activeCategory;
+  if (!catOk) return false;
+  if (!activeSearch) return true;
+  const hay = [u.title, u.summary, u.details, u.category, ...u.tags].join(" ").toLowerCase();
+  return hay.includes(activeSearch);
+}
+
+function renderList() {
+  const list = sortedUpdates().filter(matches);
+  const container = document.getElementById("updates-list");
+  document.getElementById("results-count").textContent =
+    `${list.length} update${list.length === 1 ? "" : "s"}`;
+
+  if (list.length === 0) {
+    container.innerHTML = `<div class="empty-state"><h3>No updates match that</h3><p>Try clearing the search or filter.</p></div>`;
+    return;
+  }
+
+  container.innerHTML = list.map((u, i) => `
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="update-card glass cat-${u.category}" data-index="${i}">
+        <div class="card-meta">
+          <span class="category-pill"><span class="category-dot"></span>${u.category}</span>
+          <span class="card-date">${formatDate(u.date)}</span>
+        </div>
+        <div class="card-title">
+          <span>${u.title}</span>
+          <svg class="card-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <p class="card-desc">${u.summary}</p>
+        <div class="card-tags">${u.tags.map(t => `<span class="tag-chip">#${t}</span>`).join("")}</div>
+        <div class="card-full">
+          <div class="card-full-inner">${u.details}</div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  container.querySelectorAll(".update-card").forEach(card => {
+    card.addEventListener("click", () => card.classList.toggle("expanded"));
+  });
+}
+
+document.getElementById("search-input").addEventListener("input", (e) => {
+  activeSearch = e.target.value.trim().toLowerCase();
+  renderList();
+});
+
+renderChips();
+renderList();
+</script>
+</body>
+</html>
